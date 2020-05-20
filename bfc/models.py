@@ -31,4 +31,4 @@ class PlaceItem(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     place_id = db.Column(db.Integer, index=True, unique=True)    
     name = db.Column(db.String(64), index=True, unique=True)    
-    price = db.Column(db.Double(31,2), index=True, unique=True)  # review   
+    price = db.Column(db.Numeric, index=True, unique=True)  # review   
