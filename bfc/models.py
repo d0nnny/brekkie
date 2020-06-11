@@ -3,6 +3,9 @@ from datetime import datetime
 from random import choices
 from .extensions import db
 
+
+
+
 class Order(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     customer_id = db.Column(db.Integer, db.ForeignKey('customer.id'), nullable=False)
@@ -31,7 +34,7 @@ class Menu(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(64),  unique=True)
     description = db.Column(db.String(64))
-    menuitems = db.relationship('MenuItem', backref='menu',lazy=True) # why lazy
+    menuitems = db.relationship('MenuItem', backref='menu') # lazy parameter
     
 
 class MenuItem(db.Model):
@@ -45,6 +48,7 @@ class MenuItem(db.Model):
 class Delivery(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     order_id = db.Column(db.Integer,db.ForeignKey('order.id'))
+    customer_id = db.Column(db.Integer,db.ForeignKey('customer.id'))
     delivery_man_id = db.Column(db.Integer,db.ForeignKey('delivery_man.id'))
     
 
@@ -54,3 +58,4 @@ class Delivery_Man(db.Model):
     firstname = db.Column(db.String(64),  unique=True, nullable=False)
     email = db.Column(db.String(64),  unique=True, nullable=False)
     sms_number = db.Column(db.Integer,  unique=True, nullable=False)    
+    Delivery = db.relationship('devlivery', backref='delivery_man')
