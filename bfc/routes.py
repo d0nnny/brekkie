@@ -1,12 +1,18 @@
 from flask import Blueprint, render_template, request, redirect
 from .extensions import db
 
-from .models import Link
-from .auth import requires_auth
+from .models import Order
+from .models import OrderItem
+from .models import Customer
+from .models import Menu
+from .models import MenuItem
+from .models import Delivery
+from .models import Delivery_Man
+
+
 # Request object - needed for servers's response to HTTP request
 
 
- 
 short = Blueprint('short', __name__)
 
 @short.route('/<short_url>')
