@@ -1,7 +1,7 @@
 import string
 from datetime import datetime
 from .extensions import db
-from .auth import requires_aut
+from .auth import requires_auth
 
 
 

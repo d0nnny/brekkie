@@ -16,7 +16,7 @@ short = Blueprint('short', __name__)
 @short.route('/')
 @short.route('/order')
 def index():
-    return render_template('index.html')
+   return render_template('index.html')
 
 @short.route('/add_link', methods=['POST'])
 #@requires_auth
@@ -29,13 +29,6 @@ def add_link():
     
     return render_template('link_added.html', 
         new_link=link.short_url, original_url=link.original_url)
-
-@short.route('/stats')
-#@requires_auth
-def stats():
-    links = Link.query.all()
-
-    return render_template('stats.html', links=links)
 
 
 @short.errorhandler(404)
