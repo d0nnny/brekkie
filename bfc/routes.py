@@ -18,23 +18,12 @@ short = Blueprint('short', __name__)
 def index():
    return render_template('index.html')
 
-@short.route('/menu_list', methods=['POST'])
-#@requires_auth
-def add_link():
-    original_url = request.form['original_url']
-    link = Link(original_url=original_url)
-    db.session.add(link)
-    db.session.commit()
-    #request.form: the key/value pairs in the body, from a HTML post form, or JavaScript request that isn't JSON encoded
-    
-    return render_template('link_added.html', 
-        new_link=link.short_url, original_url=link.original_url)
 
 @app.route('menus/id')
 @app.route('/menus/<id>/items')
 def showMenu(menu_id):
   menu = session.query(Menu).filter_by(id=menu_id).one()
-  items = session.query(MenuItem).filter_by(menu_id=menu_id).order_by('id desc')
+  items = session.query(MenuItem).filter_by(menu_id=menu_id)
   return render_template('menu.html')
 
 """
