@@ -8,8 +8,7 @@ from .models import Menu
 from .models import MenuItem
 from .models import Delivery
 from .models import Delivery_Man
-
-
+from .auth import requires_auth
 # Request object - needed for servers's response to HTTP request
 
 short = Blueprint('short', __name__)
@@ -20,7 +19,7 @@ def index():
     return render_template('index.html')
 
 @short.route('/add_link', methods=['POST'])
-@requires_auth
+#@requires_auth
 def add_link():
     original_url = request.form['original_url']
     link = Link(original_url=original_url)

@@ -1,8 +1,7 @@
 import string
 from datetime import datetime
-from random import choices
 from .extensions import db
-
+from .auth import requires_aut
 
 
 
@@ -10,7 +9,7 @@ class Order(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     customer_id = db.Column(db.Integer, db.ForeignKey('customer.id'), nullable=False)
     details = db.Column(db.Text)
-    time_placed = db.Column(db.datetime) # date and time expressed as Python datetime object.
+    time_placed = db.Column(db.DateTime, default=datetime.now)
     orderitem = db.relationship('OrderItem', backref='order')
     Delivery = db.relationship('Delivery', backref='order') # case sensitive ?
 
@@ -25,8 +24,8 @@ class Customer(db.Model):
     firstname = db.Column(db.String(64),  unique=True, nullable=False)
     email = db.Column(db.String(64),  unique=True, nullable=False)
     sms_number = db.Column(db.Integer,  unique=True, nullable=False)   
-    join_date = db.Column(db.datetime) 
-    order = db.relationship('Order', backref='customer', useList=False) # uesList
+    join_date = db.Column(db.DateTime, default=datetime.now)
+    order = db.relationship('Order', backref='customer') # uesList useList=False
 
 
 
