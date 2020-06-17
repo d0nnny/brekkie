@@ -12,21 +12,12 @@ from .models import Delivery_Man
 
 # Request object - needed for servers's response to HTTP request
 
-
 short = Blueprint('short', __name__)
 
-@short.route('/<short_url>')
-def redirect_to_url(short_url):
-    link = Link.query.filter_by(short_url=short_url).first_or_404() # https://flask-sqlalchemy.palletsprojects.com/en/2.x/api/
-
-    link.visits = link.visits + 1
-    db.session.commit()
-    return redirect(link.original_url)  
-
 @short.route('/')
-#@requires_auth
+@short.route('/order')
 def index():
-    return render_template('s.html')
+    return render_template('index.html')
 
 @short.route('/add_link', methods=['POST'])
 @requires_auth
